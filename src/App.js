@@ -6,17 +6,18 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
 import LibraryPage from './pages/LibraryPage';
+import './App.css'; // custom styles for layout responsiveness
 
 function App() {
   return (
     <Router>
-      <div className="app-container" style={{ display: 'flex' }}>
+      <div className="app-container">
         <Sidebar />
 
-        <div style={{ marginLeft: '220px', width: '100%', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <div className="main-content">
           <Header />
 
-          <div style={{ flex: 1, padding: '20px' }}>
+          <div className="page-body">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/search" element={<SearchPage />} />
