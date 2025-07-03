@@ -5,7 +5,7 @@ import './Sidebar.css';
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      <h2 className="logo">🎵 Musify</h2>
+      {/* <h2 className="logo">🎵 Musify</h2> */}
       <nav className="nav-links">
         <NavLink to="/" className="nav-link">
           <span className="icon">🏠</span>

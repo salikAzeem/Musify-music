@@ -12,7 +12,7 @@ const HomePage = () => {
       <div className="overlay">
         <div className="hero-section">
           <h1 className="hero-title">Welcome to <span>Musify</span> 🎧</h1>
-          <p className="hero-subtitle">Stream your favorite music with the power of the JioSaavn API</p>
+          <p className="hero-subtitle">Stream your favorite music with the power of the Musify</p>
           <a href="/search" className="hero-button">Start Listening</a>
         </div>
 
@@ -22,12 +22,12 @@ const HomePage = () => {
             <p>Search and play trending songs, albums, and artists in one click.</p>
           </div>
           <div className="feature-card">
-            <h3>🔥 Powered by JioSaavn</h3>
-            <p>Using the fastest and most reliable unofficial API for music search.</p>
+            <h3>🔥 Powered by Sheikh</h3>
+            <p>Using the fastest and most reliable Musify for music search.</p>
           </div>
           <div className="feature-card">
             <h3>🎧 Enjoy the UI</h3>
-            <p>Modern, clean, and Spotify-inspired design for the best user experience.</p>
+            <p>Modern, clean, and bug-free design for the best user experience.</p>
           </div>
         </div>
       </div>

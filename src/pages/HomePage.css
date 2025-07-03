@@ -2,7 +2,7 @@
   position: relative;
   overflow: hidden;
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  color: white;
+  color:  rgba(40, 40, 40, 0.9);;
 }
 
 .background-video {

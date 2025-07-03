@@ -1,9 +1,20 @@
+/* Wrapper aligns everything in the center */
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Form layout and spacing */
 .search-form {
+  width: 100%;
   display: flex;
   justify-content: center;
   margin: 40px 0 30px;
 }
 
+/* Search bar container */
 .search-box {
   display: flex;
   align-items: center;
@@ -22,12 +33,14 @@
   box-shadow: 0 0 10px #1db954;
 }
 
+/* Search icon */
 .search-icon {
   color: #b3b3b3;
   margin-right: 10px;
   font-size: 18px;
 }
 
+/* Input field */
 .search-box input {
   flex: 1;
   background: transparent;
@@ -37,6 +50,7 @@
   font-size: 16px;
 }
 
+/* Search button */
 .search-box button {
   background-color: #1db954;
   border: none;
@@ -51,4 +65,65 @@
 
 .search-box button:hover {
   background-color: #1ed760;
+}
+
+/* Suggestions dropdown */
+.suggestion-list {
+  position: absolute;
+  top: calc(100% + 8px);
+  width: 60%;
+  max-width: 600px;
+  background-color: #181818;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+/* Individual suggestion item */
+.suggestion-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.suggestion-list li:hover {
+  background-color: #282828;
+}
+
+/* Image in suggestion */
+.suggestion-list img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* Text container in suggestion */
+.suggestion-list div {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.suggestion-list strong {
+  color: #fff;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggestion-list span {
+  font-size: 12px;
+  color: #b3b3b3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

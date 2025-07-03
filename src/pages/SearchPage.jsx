@@ -21,12 +21,19 @@ const SearchPage = () => {
 
   return (
     <div className="search-page">
-      <h1 className="search-header">🔍 Search Your Music</h1>
-      <SearchBar onSearch={handleSearch} />
+      <video autoPlay loop muted playsInline className="background-video">
+        <source src="/background.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-      <div className="search-results">
-        <SongList songs={songs} onPlay={handlePlay} />
-        <Player song={currentSong} />
+      <div className="search-overlay">
+        <h1 className="search-header">🔍 Search Your Music</h1>
+        <SearchBar onSearch={handleSearch} />
+
+        <div className="search-results">
+          <SongList songs={songs} onPlay={handlePlay} />
+          <Player song={currentSong} />
+        </div>
       </div>
     </div>
   );
