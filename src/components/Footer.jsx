@@ -4,7 +4,7 @@ import './Footer.css';
 const Footer = () => {
   return (
     <footer className="main-footer">
-      <p>© {new Date().getFullYear()} Musify · Powered by Sheikh</p>
+      <p>© {new Date().getFullYear()} Musify · Developed by Salik Azeem</p>
     </footer>
   );
 };
