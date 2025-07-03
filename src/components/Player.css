@@ -1,3 +1,4 @@
+
 .player-bar {
   position: fixed;
   bottom: 0;
@@ -78,4 +79,12 @@
 .volume-slider {
   width: 100px;
   accent-color: #1db954;
+}
+
+@media (max-width: 768px) {
+  .player-bar {
+    left: 0;
+    right: 0;
+    width: 100vw;
+  }
 }
