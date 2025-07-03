@@ -1,0 +1,19 @@
+.search-page {
+  color: white;
+  padding: 40px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #121212;
+}
+
+.search-header {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #1db954;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.search-results {
+  margin-top: 30px;
+}
