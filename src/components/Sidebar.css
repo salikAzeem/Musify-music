@@ -1,3 +1,4 @@
+/* Sidebar Styles */
 .sidebar {
   position: fixed;
   top: 0;
@@ -9,7 +10,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  z-index: 100;
+  z-index: 999; /* ⬆️ Make sure it's above header */
   border-right: 1px solid #222;
   transition: transform 0.3s ease;
 }
@@ -25,7 +26,7 @@
   font-size: 20px;
   padding: 10px 12px;
   border-radius: 6px;
-  z-index: 200;
+  z-index: 1000; /* ⬆️ Above sidebar & header */
   cursor: pointer;
 }
 
@@ -71,5 +72,9 @@
 
   .sidebar-toggle {
     display: block;
+  }
+
+  .main-header {
+    z-index: 998; /* ⬇️ Lower than sidebar and toggle */
   }
 }

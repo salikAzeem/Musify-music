@@ -4,15 +4,14 @@
   background-color: #000;
   border-bottom: 1px solid #1a1a1a;
   display: flex;
-  justify-content: center;       /* ✅ Center horizontally */
+  justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 998; /* ⬅️ Lower than sidebar */
 }
 
 .logo-wrapper {
   display: flex;
   align-items: center;
-                      
 }
 
 .site-logo {
@@ -34,7 +33,6 @@
   }
 }
 
-
 .site-name {
   font-size: 48px;
   font-weight: 700;
@@ -55,4 +53,3 @@
     transform: translateY(0);
   }
 }
-
