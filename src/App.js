@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
 import LibraryPage from './pages/LibraryPage';
 import './App.css'; 
+import PlaylistPage from './pages/PlaylistPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/library" element={<LibraryPage />} />
+              <Route path="/playlist/:playlistId" element={<PlaylistPage />} />
             </Routes>
           </div>
 

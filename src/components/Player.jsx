@@ -3,6 +3,7 @@ import {
   FaPlay,
   FaPause,
   FaVolumeUp,
+  FaVolumeMute,
   FaChevronUp,
   FaChevronDown
 } from 'react-icons/fa';
@@ -13,13 +14,16 @@ const Player = ({ song }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);
-  const [expanded, setExpanded] = useState(window.innerWidth > 768); // true for desktop
+  const [isMuted, setIsMuted] = useState(false);
+  const [expanded, setExpanded] = useState(window.innerWidth > 768);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = volume;
+      audioRef.current.volume = isMuted ? 0 : volume;
     }
-  }, [volume]);
+  }, [volume, isMuted]);
 
   const togglePlay = () => {
     const audio = audioRef.current;
@@ -33,10 +37,15 @@ const Player = ({ song }) => {
     setIsPlaying(!isPlaying);
   };
 
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+  };
+
   const handleTimeUpdate = () => {
     const audio = audioRef.current;
-    const progressPercent = (audio.currentTime / audio.duration) * 100;
-    setProgress(progressPercent || 0);
+    setCurrentTime(audio.currentTime);
+    setDuration(audio.duration || 0);
+    setProgress((audio.currentTime / audio.duration) * 100 || 0);
   };
 
   const handleSeek = (e) => {
@@ -44,6 +53,12 @@ const Player = ({ song }) => {
     const seekTime = (e.target.value / 100) * audio.duration;
     audio.currentTime = seekTime;
     setProgress(e.target.value);
+  };
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60) || 0;
+    const seconds = Math.floor(time % 60) || 0;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
   if (!song) return null;
@@ -77,10 +92,16 @@ const Player = ({ song }) => {
               value={progress}
               onChange={handleSeek}
             />
+            <div className="time-info">
+              <span>{formatTime(currentTime)}</span>
+              <span>{formatTime(duration)}</span>
+            </div>
           </div>
 
           <div className="volume-controls">
-            <FaVolumeUp className="volume-icon" />
+            <button className="mute-btn" onClick={toggleMute}>
+              {isMuted ? <FaVolumeMute className="volume-icon" /> : <FaVolumeUp className="volume-icon" />}
+            </button>
             <input
               type="range"
               min="0"

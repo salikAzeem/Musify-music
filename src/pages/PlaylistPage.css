@@ -1,0 +1,70 @@
+.playlist-page {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.playlist-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.playlist-overlay {
+  position: relative;
+  z-index: 1;
+  padding: 40px 20px;
+  background-color: rgba(0, 0, 0, 0.6); /* Dark transparent overlay */
+  min-height: 100vh;
+}
+
+.play-all-btn {
+  background-color: #1db954;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.play-all-btn:hover {
+  background-color: #1ed760;
+}
+
+.play-all-btn {
+  background-color: #1db954;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.play-all-btn:hover {
+  background-color: #1ed760;
+}
+
+.export-btn {
+  background-color: transparent;
+  border: 1px solid #1db954;
+  color: #1db954;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.export-btn:hover {
+  background-color: #1db954;
+  color: white;
+}

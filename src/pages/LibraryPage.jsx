@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SongList from '../components/SongList';
-import './LibraryPage.css'; // Make sure this CSS file exists
+import PlaylistManager from '../components/PlaylistManager';
+import './LibraryPage.css';
 
 const LibraryPage = () => {
   const [likedSongs, setLikedSongs] = useState([]);
@@ -12,13 +13,10 @@ const LibraryPage = () => {
 
   return (
     <div className="library-page">
-      {/* 🎥 Background video */}
       <video autoPlay loop muted playsInline className="background-video">
         <source src="/background.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
 
-      {/* Dark overlay */}
       <div className="library-overlay">
         <h1 style={{ color: '#1db954', marginBottom: '20px' }}>💚 Liked Songs</h1>
 
@@ -27,6 +25,8 @@ const LibraryPage = () => {
         ) : (
           <SongList songs={likedSongs} onPlay={() => {}} />
         )}
+
+        <PlaylistManager />
       </div>
     </div>
   );

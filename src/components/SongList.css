@@ -97,3 +97,46 @@
   transform: scale(1.15); /* Adds a nice hover pop */
 }
 
+
+
+.playlist-btn {
+  margin-top: 8px;
+  background: #1db954;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.playlist-btn:hover {
+  background: #1ed760;
+}
+
+.playlist-dropdown {
+  background-color: #282828;
+  border: 1px solid #444;
+  margin-top: 8px;
+  border-radius: 6px;
+  padding: 8px;
+  z-index: 10;
+  font-size: 14px;
+  color: white;
+}
+
+.playlist-item {
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.playlist-item:hover {
+  background-color: #1db954;
+}
+
+.playlist-item.disabled {
+  color: #aaa;
+  cursor: default;
+}

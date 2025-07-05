@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { FaPlay } from 'react-icons/fa';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
-import './SongList.css'; // create or update styles
+import { FaPlay, FaHeart, FaRegHeart } from 'react-icons/fa';
+import './SongList.css';
 
 const SongList = ({ songs, onPlay }) => {
   const [likedSongs, setLikedSongs] = useState([]);
+  const [playlists, setPlaylists] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(null);
 
   useEffect(() => {
     const savedLikes = JSON.parse(localStorage.getItem('likedSongs')) || [];
     setLikedSongs(savedLikes);
+
+    const storedPlaylists = JSON.parse(localStorage.getItem('playlists')) || [];
+    setPlaylists(storedPlaylists);
   }, []);
 
   const toggleLike = (song) => {
@@ -23,6 +27,19 @@ const SongList = ({ songs, onPlay }) => {
 
     setLikedSongs(updatedLikes);
     localStorage.setItem('likedSongs', JSON.stringify(updatedLikes));
+  };
+
+  const handleAddToPlaylist = (song, playlistId) => {
+    const updated = playlists.map((p) => {
+      if (p.id === playlistId && !p.songs.find((s) => s.id === song.id)) {
+        return { ...p, songs: [...p.songs, song] };
+      }
+      return p;
+    });
+
+    localStorage.setItem('playlists', JSON.stringify(updated));
+    setPlaylists(updated);
+    setShowDropdown(null);
   };
 
   return (
@@ -46,6 +63,31 @@ const SongList = ({ songs, onPlay }) => {
               <FaRegHeart />
             )}
           </button>
+
+          <button
+            className="playlist-btn"
+            onClick={() => setShowDropdown(showDropdown === song.id ? null : song.id)}
+          >
+            ➕ Add to Playlist
+          </button>
+
+          {showDropdown === song.id && (
+            <div className="playlist-dropdown">
+              {playlists.length === 0 ? (
+                <div className="playlist-item disabled">No playlists yet</div>
+              ) : (
+                playlists.map((pl) => (
+                  <div
+                    key={pl.id}
+                    className="playlist-item"
+                    onClick={() => handleAddToPlaylist(song, pl.id)}
+                  >
+                    {pl.name}
+                  </div>
+                ))
+              )}
+            </div>
+          )}
         </div>
       ))}
     </div>
