@@ -48,8 +48,10 @@ const SongList = ({ songs, onPlay }) => {
         <div key={song.id} className="song-card">
           <div className="song-card-top" onClick={() => onPlay(song.id)}>
             <img className="song-img" src={song.image[1].url} alt={song.name} />
-            <p><strong>{song.name}</strong></p>
-            <p style={{ color: '#b3b3b3' }}>{song.language}</p>
+            <div className="song-info">
+              <h4>{song.name}</h4>
+              <p>{song.language}</p>
+            </div>
           </div>
 
           <button

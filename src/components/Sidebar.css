@@ -10,11 +10,12 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  z-index: 999; /* ⬆️ Make sure it's above header */
+  z-index: 999; /* Ensure above header */
   border-right: 1px solid #222;
   transition: transform 0.3s ease;
 }
 
+/* Toggle button */
 .sidebar-toggle {
   display: none;
   position: fixed;
@@ -26,8 +27,16 @@
   font-size: 20px;
   padding: 10px 12px;
   border-radius: 6px;
-  z-index: 1000; /* ⬆️ Above sidebar & header */
+  z-index: 1000; /* Always above sidebar & header */
   cursor: pointer;
+}
+
+/* Logo styling (optional if used) */
+.logo {
+  font-size: 24px;
+  color: #1db954;
+  text-align: center;
+  margin-bottom: 60px; /* ⬅️ Push nav links down */
 }
 
 /* Nav styling */
@@ -35,6 +44,7 @@
   display: flex;
   flex-direction: column;
   gap: 25px;
+  margin-top: 60px; /* ⬅️ Push "Home", "Search", etc. slightly lower */
 }
 
 .nav-link {
@@ -75,6 +85,6 @@
   }
 
   .main-header {
-    z-index: 998; /* ⬇️ Lower than sidebar and toggle */
+    z-index: 998; /* Lower than sidebar/toggle */
   }
 }

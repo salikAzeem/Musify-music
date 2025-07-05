@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 0 transparent;
+  position: relative;
 }
 
 .song-card:hover {
@@ -21,49 +22,20 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
-.image-container {
-  position: relative;
-  width: 100%;
-  height: 180px;
-  overflow: hidden;
-}
-
 .song-img {
   width: 100%;
-  height: 100%;
+  height: 180px;
   object-fit: cover;
   display: block;
 }
 
-.play-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.song-card:hover .play-overlay {
-  opacity: 1;
-}
-
-.play-icon {
-  color: white;
-  background: #1db954;
-  padding: 12px;
-  border-radius: 50%;
-  font-size: 24px;
-}
-
+/* NEW: Wrap song text properly */
 .song-info {
   padding: 15px 10px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .song-info h4 {
@@ -71,6 +43,9 @@
   font-weight: 600;
   margin: 5px 0 0;
   color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .song-info p {
@@ -86,7 +61,7 @@
   background: transparent;
   border: none;
   color: #b3b3b3;
-  font-size: 24px; /* ⬆️ Increased from 18px */
+  font-size: 24px;
   cursor: pointer;
   z-index: 2;
   transition: color 0.2s ease, transform 0.2s ease;
@@ -94,13 +69,11 @@
 
 .like-btn:hover {
   color: #b91d1d;
-  transform: scale(1.15); /* Adds a nice hover pop */
+  transform: scale(1.15);
 }
 
-
-
 .playlist-btn {
-  margin-top: 8px;
+  margin: 8px auto 0;
   background: #1db954;
   border: none;
   padding: 6px 10px;
@@ -109,6 +82,7 @@
   font-size: 13px;
   cursor: pointer;
   transition: background 0.3s ease;
+  width: fit-content;
 }
 
 .playlist-btn:hover {

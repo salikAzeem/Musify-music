@@ -28,7 +28,8 @@ const SearchPage = () => {
 
       <div className="search-overlay">
         <h1 className="search-header">🔍 Search Your Music</h1>
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar onSearch={handleSearch} onPlay={handlePlay} />
+
 
         <div className="search-results">
           <SongList songs={songs} onPlay={handlePlay} />

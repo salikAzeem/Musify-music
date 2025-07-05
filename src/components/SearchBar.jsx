@@ -3,7 +3,7 @@ import { FaSearch } from 'react-icons/fa';
 import { searchSongs } from '../api/jiosaavn';
 import './SearchBar.css';
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, onPlay }) => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -28,10 +28,13 @@ const SearchBar = ({ onSearch }) => {
     setShowSuggestions(false);
   };
 
-  const handleSuggestionClick = (name) => {
-    setQuery(name);
-    onSearch(name);
+  const handleSuggestionClick = async (song) => {
+    setQuery(song.name);
     setShowSuggestions(false);
+    onSearch(song.name); // triggers search result update
+    if (onPlay && song.id) {
+      onPlay(song.id); // directly plays selected suggestion
+    }
   };
 
   return (
@@ -54,7 +57,7 @@ const SearchBar = ({ onSearch }) => {
       {showSuggestions && (
         <ul className="suggestion-list">
           {suggestions.map((song) => (
-            <li key={song.id} onClick={() => handleSuggestionClick(song.name)}>
+            <li key={song.id} onClick={() => handleSuggestionClick(song)}>
               <img src={song.image[1].url} alt={song.name} />
               <div>
                 <strong>{song.name}</strong>
