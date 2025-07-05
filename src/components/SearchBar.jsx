@@ -41,7 +41,7 @@ const SearchBar = ({ onSearch }) => {
           <FaSearch className="search-icon" />
           <input
             type="text"
-            placeholder="Search for songs, albums, or artists..."
+            placeholder="Search for songs.."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => setShowSuggestions(suggestions.length > 0)}

@@ -1,5 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { FaPlay, FaPause, FaVolumeUp } from 'react-icons/fa';
+import {
+  FaPlay,
+  FaPause,
+  FaVolumeUp,
+  FaChevronUp,
+  FaChevronDown
+} from 'react-icons/fa';
 import './Player.css';
 
 const Player = ({ song }) => {
@@ -7,6 +13,7 @@ const Player = ({ song }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);
+  const [expanded, setExpanded] = useState(window.innerWidth > 768); // true for desktop
 
   useEffect(() => {
     if (audioRef.current) {
@@ -42,40 +49,50 @@ const Player = ({ song }) => {
   if (!song) return null;
 
   return (
-    <div className="player-bar">
-      <div className="song-info">
-        <img src={song.image[1].url} alt={song.name} className="song-cover" />
+    <div className={`player-bar ${expanded ? 'expanded' : 'mini'}`}>
+      <div className="song-info" onClick={() => setExpanded(!expanded)}>
+        <img
+          src={song.image[1].url}
+          alt={song.name}
+          className={`song-cover ${isPlaying ? 'spin' : ''}`}
+        />
         <div className="song-details">
           <h4>{song.name}</h4>
           <p>{song.primaryArtists}</p>
         </div>
-      </div>
-
-      <div className="audio-controls">
-        <button className="play-btn" onClick={togglePlay}>
-          {isPlaying ? <FaPause /> : <FaPlay />}
+        <button className="toggle-view">
+          {expanded ? <FaChevronDown /> : <FaChevronUp />}
         </button>
-
-        <input
-          type="range"
-          className="progress-bar"
-          value={progress}
-          onChange={handleSeek}
-        />
       </div>
 
-      <div className="volume-controls">
-        <FaVolumeUp className="volume-icon" />
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          value={volume}
-          onChange={(e) => setVolume(parseFloat(e.target.value))}
-          className="volume-slider"
-        />
-      </div>
+      {expanded && (
+        <>
+          <div className="audio-controls">
+            <button className="play-btn" onClick={togglePlay}>
+              {isPlaying ? <FaPause /> : <FaPlay />}
+            </button>
+            <input
+              type="range"
+              className="progress-bar"
+              value={progress}
+              onChange={handleSeek}
+            />
+          </div>
+
+          <div className="volume-controls">
+            <FaVolumeUp className="volume-icon" />
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={(e) => setVolume(parseFloat(e.target.value))}
+              className="volume-slider"
+            />
+          </div>
+        </>
+      )}
 
       <audio
         ref={audioRef}

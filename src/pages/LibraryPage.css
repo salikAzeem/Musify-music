@@ -2,9 +2,6 @@
   position: relative;
   overflow: hidden;
   min-height: 100vh;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  color: white;
-  padding: 40px;
 }
 
 .background-video {
@@ -17,13 +14,10 @@
   z-index: -2;
 }
 
-.overlay {
+.library-overlay {
   position: relative;
-  z-index: 2;
-  background-color: rgba(0, 0, 0, 0.75); /* dark semi-transparent overlay */
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.75); /* dark overlay */
   padding: 40px;
-  border-radius: 10px;
-  max-width: 600px;
-  margin: 100px auto;
-  text-align: center;
+  min-height: 100vh;
 }

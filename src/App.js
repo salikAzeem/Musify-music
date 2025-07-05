@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
 import LibraryPage from './pages/LibraryPage';
-import './App.css'; // custom styles for layout responsiveness
+import './App.css'; 
 
 function App() {
   return (

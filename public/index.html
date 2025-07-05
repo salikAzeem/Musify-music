@@ -4,8 +4,54 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Musify</title>
+
+  <!-- OPTIONAL: Emoji favicon instead of logo.png -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>" />
+
+  <style>
+    #preload-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      background-color: #000;
+    }
+
+    #preload-logo .icon {
+      font-size: 120px;
+      color: #1db954;
+      margin-bottom: 20px;
+    }
+
+    #preload-logo h1 {
+      color: #1db954;
+      font-size: 48px;
+      font-family: 'Helvetica Neue', sans-serif;
+      margin: 0;
+    }
+  </style>
 </head>
+
 <body>
+  <div id="preload-logo">
+    <div class="icon">🎵</div>
+    <h1>Musify</h1>
+  </div>
+
   <div id="root"></div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const rootObserver = new MutationObserver(() => {
+        const root = document.getElementById('root');
+        if (root && root.childElementCount > 0) {
+          const preload = document.getElementById('preload-logo');
+          if (preload) preload.style.display = 'none';
+        }
+      });
+      rootObserver.observe(document.getElementById('root'), { childList: true });
+    });
+  </script>
 </body>
 </html>
