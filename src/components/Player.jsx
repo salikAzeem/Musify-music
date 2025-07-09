@@ -7,20 +7,25 @@ import {
   FaVolumeMute,
   FaChevronUp,
   FaChevronDown,
+  FaRandom,
+  FaRedo,
 } from 'react-icons/fa';
 import { useQueue } from '../context/queueContext';
 import './Player.css';
 
 const Player = ({ song: propSong }) => {
-  const { currentSong, popNext, playSong } = useQueue();
+  const { currentSong, getNext, skip } = useQueue();
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
-  const [expanded, setExpanded] = useState(window.innerWidth > 768);
+  const [expanded, setExpanded] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [repeat, setRepeat] = useState(false);
+  const [shuffle, setShuffle] = useState(false);
+  const startYRef = useRef(null);
 
   const song = propSong || currentSong;
 
@@ -33,7 +38,6 @@ const Player = ({ song: propSong }) => {
   useEffect(() => {
     if (song) {
       const stored = JSON.parse(localStorage.getItem('recentlyPlayed')) || [];
-
       const fallbackImage =
         typeof song.image === 'string'
           ? song.image
@@ -52,7 +56,6 @@ const Player = ({ song: propSong }) => {
 
       const filtered = stored.filter((s) => s.id !== newEntry.id);
       const updated = [newEntry, ...filtered].slice(0, 50);
-
       localStorage.setItem('recentlyPlayed', JSON.stringify(updated));
     }
   }, [song]);
@@ -60,7 +63,6 @@ const Player = ({ song: propSong }) => {
   const togglePlay = () => {
     const audio = audioRef.current;
     if (!audio) return;
-
     if (isPlaying) {
       audio.pause();
     } else {
@@ -70,6 +72,8 @@ const Player = ({ song: propSong }) => {
   };
 
   const toggleMute = () => setIsMuted(!isMuted);
+  const toggleRepeat = () => setRepeat(!repeat);
+  const toggleShuffle = () => setShuffle(!shuffle);
 
   const handleTimeUpdate = () => {
     const audio = audioRef.current;
@@ -86,9 +90,25 @@ const Player = ({ song: propSong }) => {
   };
 
   const handleSongEnd = () => {
-    const next = popNext?.();
-    if (!next) {
-      setIsPlaying(false);
+    if (repeat) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+      return;
+    }
+    skip();
+    setIsPlaying(false);
+  };
+
+  const handleTouchStart = (e) => {
+    startYRef.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e) => {
+    const endY = e.changedTouches[0].clientY;
+    if (startYRef.current - endY > 50) {
+      setExpanded(true);
+    } else if (endY - startYRef.current > 50) {
+      setExpanded(false);
     }
   };
 
@@ -108,7 +128,11 @@ const Player = ({ song: propSong }) => {
       : '';
 
   return (
-    <div className={`player-bar ${expanded ? 'expanded' : 'mini'}`}>
+    <div
+      className={`player-bar ${expanded ? 'expanded' : 'mini'}`}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="song-info" onClick={() => setExpanded(!expanded)}>
         <img
           src={imageSrc}
@@ -127,9 +151,18 @@ const Player = ({ song: propSong }) => {
       {expanded && (
         <>
           <div className="audio-controls">
-            <button className="play-btn" onClick={togglePlay}>
-              {isPlaying ? <FaPause /> : <FaPlay />}
-            </button>
+            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <button className="control-btn" onClick={toggleShuffle} title="Shuffle">
+                <FaRandom color={shuffle ? '#1db954' : 'white'} />
+              </button>
+              <button className="play-btn" onClick={togglePlay}>
+                {isPlaying ? <FaPause /> : <FaPlay />}
+              </button>
+              <button className="control-btn" onClick={toggleRepeat} title="Repeat">
+                <FaRedo color={repeat ? '#1db954' : 'white'} />
+              </button>
+            </div>
+
             <input
               type="range"
               className="progress-bar"
