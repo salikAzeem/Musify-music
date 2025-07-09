@@ -8,30 +8,40 @@ import SearchPage from './pages/SearchPage';
 import LibraryPage from './pages/LibraryPage';
 import './App.css'; 
 import PlaylistPage from './pages/PlaylistPage';
+import TopChartsPage from './pages/TopChartsPage'; 
+import RecentlyPlayedPage from './pages/RecentlyPlayedPage';
+import { QueueProvider } from './context/queueContext';
+
+
+
+
+
 
 function App() {
   return (
-    <Router>
-      <div className="app-container">
-        <Sidebar />
-
-        <div className="main-content">
-          <Header />
-
-          <div className="page-body">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/library" element={<LibraryPage />} />
-              <Route path="/playlist/:playlistId" element={<PlaylistPage />} />
-            </Routes>
+    <QueueProvider>
+      <Router>
+        <div className="app-container">
+          <Sidebar />
+          <div className="main-content">
+            <Header />
+            <div className="page-body">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/library" element={<LibraryPage />} />
+                <Route path="/recently-played" element={<RecentlyPlayedPage />} />
+                <Route path="/playlist/:playlistId" element={<PlaylistPage />} />
+                <Route path="/top-charts" element={<TopChartsPage />} />
+              </Routes>
+            </div>
+            <Footer />
           </div>
-
-          <Footer />
         </div>
-      </div>
-    </Router>
+      </Router>
+    </QueueProvider>
   );
 }
+
 
 export default App;

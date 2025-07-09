@@ -23,13 +23,25 @@ const Sidebar = () => {
             <span className="icon">🏠</span>
             <span>Home</span>
           </NavLink>
+
           <NavLink to="/search" className="nav-link">
             <span className="icon">🔍</span>
             <span>Search</span>
           </NavLink>
+
           <NavLink to="/library" className="nav-link">
             <span className="icon">📁</span>
             <span>Your Library</span>
+          </NavLink>
+
+          <NavLink to="/top-charts" className="nav-link">
+            <span className="icon">🔥</span>
+            <span>Top Charts</span>
+          </NavLink>
+
+          <NavLink to="/recently-played" className="nav-link">
+            <span className="icon">🎧</span>
+            <span>Recently Played</span>
           </NavLink>
         </nav>
       </div>

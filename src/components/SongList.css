@@ -114,3 +114,19 @@
   color: #aaa;
   cursor: default;
 }
+
+.song-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.queue-btn,
+.next-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}

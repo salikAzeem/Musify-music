@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlay, FaHeart, FaRegHeart } from 'react-icons/fa';
 import './SongList.css';
+import { useQueue } from '../context/queueContext'; // ✅ Import queue
 
 const SongList = ({ songs, onPlay }) => {
   const [likedSongs, setLikedSongs] = useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [showDropdown, setShowDropdown] = useState(null);
+  const { addToQueue, playNext } = useQueue(); // ✅ Use queue context
 
   useEffect(() => {
     const savedLikes = JSON.parse(localStorage.getItem('likedSongs')) || [];
@@ -42,36 +44,60 @@ const SongList = ({ songs, onPlay }) => {
     setShowDropdown(null);
   };
 
+  const getImage = (song) => {
+    if (typeof song.image === 'string') return song.image;
+    if (Array.isArray(song.image)) return song.image[1]?.url || song.image[0]?.url;
+    return '';
+  };
+
   return (
     <div className="song-grid">
       {songs.map((song) => (
-        <div key={song.id} className="song-card">
-          <div className="song-card-top" onClick={() => onPlay(song.id)}>
-            <img className="song-img" src={song.image[1].url} alt={song.name} />
+        <div key={song.id || song.song} className="song-card">
+          <div className="song-card-top" onClick={() => onPlay(song.id || song.song)}>
+            <img className="song-img" src={getImage(song)} alt={song.song || song.name} />
             <div className="song-info">
-              <h4>{song.name}</h4>
+              <h4>{song.song || song.name}</h4>
               <p>{song.language}</p>
             </div>
           </div>
 
-          <button
-            className="like-btn"
-            onClick={() => toggleLike(song)}
-            title="Like this song"
-          >
-            {likedSongs.some((s) => s.id === song.id) ? (
-              <FaHeart style={{ color: '#1db954' }} />
-            ) : (
-              <FaRegHeart />
-            )}
-          </button>
+          <div className="song-actions">
+            <button
+              className="like-btn"
+              onClick={() => toggleLike(song)}
+              title="Like this song"
+            >
+              {likedSongs.some((s) => s.id === song.id) ? (
+                <FaHeart style={{ color: '#1db954' }} />
+              ) : (
+                <FaRegHeart />
+              )}
+            </button>
 
-          <button
-            className="playlist-btn"
-            onClick={() => setShowDropdown(showDropdown === song.id ? null : song.id)}
-          >
-            ➕ Add to Playlist
-          </button>
+            <button
+              className="playlist-btn"
+              onClick={() => setShowDropdown(showDropdown === song.id ? null : song.id)}
+            >
+              ➕ Add to Playlist
+            </button>
+
+            <button
+              className="queue-btn"
+              onClick={() => addToQueue(song)}
+              title="Add to Queue"
+            >
+              ➕ Queue
+            </button>
+
+            <button
+              className="next-btn"
+              onClick={() => playNext(song)}
+              title="Play Next"
+            >
+              ⏭️ Next
+            </button>
+          </div>
 
           {showDropdown === song.id && (
             <div className="playlist-dropdown">
