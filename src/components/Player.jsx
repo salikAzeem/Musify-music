@@ -60,6 +60,17 @@ const Player = ({ song: propSong }) => {
     }
   }, [song]);
 
+  useEffect(() => {
+    if (expanded) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [expanded]);
+
   const togglePlay = () => {
     const audio = audioRef.current;
     if (!audio) return;
