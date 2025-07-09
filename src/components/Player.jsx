@@ -79,7 +79,6 @@ const Player = ({ song: propSong }) => {
     } else {
       audio.play();
     }
-    setIsPlaying(!isPlaying);
   };
 
   const toggleMute = () => setIsMuted(!isMuted);
@@ -107,7 +106,6 @@ const Player = ({ song: propSong }) => {
       return;
     }
     skip();
-    setIsPlaying(false);
   };
 
   const handleTouchStart = (e) => {
@@ -208,6 +206,8 @@ const Player = ({ song: propSong }) => {
         src={song.media_url || (song.downloadUrl && song.downloadUrl[1]?.url)}
         onTimeUpdate={handleTimeUpdate}
         onEnded={handleSongEnd}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
         autoPlay
       />
     </div>

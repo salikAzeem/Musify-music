@@ -49,13 +49,15 @@
   .player-bar.expanded .song-info {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 100%;
+    margin-bottom: 20px;
   }
 
   .player-bar.expanded .song-cover {
     width: 250px;
     height: 250px;
-    margin: 0 auto 20px;
+    margin-bottom: 20px;
     object-fit: cover;
   }
 
@@ -68,7 +70,7 @@
   .player-bar.expanded .audio-controls,
   .player-bar.expanded .volume-controls {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   .player-bar.expanded .progress-bar {
@@ -83,8 +85,6 @@
     display: none;
   }
 }
-
-
 
 /* Song Info Section */
 .song-info {
@@ -152,6 +152,7 @@
   border: none;
   font-size: 18px;
   cursor: pointer;
+  color: white;
 }
 
 .progress-bar {
