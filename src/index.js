@@ -1,21 +1,17 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom/client';
-// import App from './App';
-// import './index.css';
-
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(<App />);
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
-
-// ✅ Import service worker
+import { AuthProvider } from './context/AuthContext';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+
+root.render(
+  <AuthProvider>
+    <App />
+  </AuthProvider>
+);
 
 // ✅ Register PWA
 serviceWorkerRegistration.register();

@@ -1,55 +1,91 @@
 .main-header {
   width: 100%;
-  padding: 1px 0;
   background-color: #000;
   border-bottom: 1px solid #1a1a1a;
+  padding: 10px 0;
+  z-index: 998;
   display: flex;
   justify-content: center;
-  align-items: center;
-  z-index: 998; /* ⬅️ Lower than sidebar */
 }
 
+.header-content {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo + Name */
 .logo-wrapper {
+  height:max-content;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .site-logo {
-  height: 120px;
+  height: 110px;
+  margin-right: 10px;
   object-fit: contain;
-  animation: logoFadeIn 1s ease-out forwards;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-@keyframes logoFadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 
 .site-name {
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 700;
   color: #1db954;
   font-family: 'Helvetica Neue', sans-serif;
-  margin: 0;
-  opacity: 0;
-  animation: nameFadeIn 1s ease-out 0.3s forwards;
 }
 
-@keyframes nameFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+/* Auth Nav */
+.auth-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-btn {
+  background-color: transparent;
+  border: 1px solid #1db954;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-btn:hover {
+  background-color: #1db954;
+  color: black;
+}
+
+.welcome-text {
+  margin-right: 10px;
+  color: #1db954;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .auth-nav {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .site-name {
+    font-size: 24px;
+  }
+
+  .auth-btn {
+    padding: 4px 10px;
+    font-size: 14px;
   }
 }

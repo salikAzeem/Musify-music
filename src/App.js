@@ -11,6 +11,9 @@ import PlaylistPage from './pages/PlaylistPage';
 import TopChartsPage from './pages/TopChartsPage'; 
 import RecentlyPlayedPage from './pages/RecentlyPlayedPage';
 import { QueueProvider } from './context/queueContext';
+import { AuthProvider } from './context/AuthContext';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 
 
@@ -27,6 +30,8 @@ function App() {
             <Header />
             <div className="page-body">
               <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
                 <Route path="/" element={<HomePage />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/library" element={<LibraryPage />} />
