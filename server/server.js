@@ -11,7 +11,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:3000', // ✅ OR your Vercel frontend URL
+  origin: 'https://musify-music-two.vercel.app', // ✅ OR your Vercel frontend URL
   credentials: true
 }));
 app.use(express.json());
