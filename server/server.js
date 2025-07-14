@@ -10,10 +10,14 @@ dotenv.config();
 const app = express();
 
 // Middleware
+const cors = require('cors');
+
 app.use(cors({
-  origin: 'https://musify-music-two.vercel.app', // ✅ OR your Vercel frontend URL
+  origin: ['https://musify-music-two.vercel.app'], // ✅ your deployed frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
+
 app.use(express.json());
 
 // API Routes
