@@ -16,7 +16,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/register', form);
+      const res = await axios.post('https://musify-backend-hz9d.onrender.com/api/auth/register', form);
       navigate('/login'); // ✅ go to login after registration
     } catch (err) {
       setError(err.response?.data?.msg || 'Registration failed');

@@ -18,7 +18,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', form);
+      const res = await axios.post('https://musify-backend-hz9d.onrender.com/api/auth/register', form);
       saveAuth(res.data); // ✅ store token + user
       navigate('/'); // ✅ redirect to home
     } catch (err) {
