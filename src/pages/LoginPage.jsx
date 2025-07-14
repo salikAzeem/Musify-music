@@ -18,9 +18,9 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://musify-backend-hz9d.onrender.com/api/auth/register', form);
-      saveAuth(res.data); // ✅ store token + user
-      navigate('/'); // ✅ redirect to home
+      const res = await axios.post('https://musify-backend-hz9d.onrender.com/api/auth/login', form);
+      saveAuth(res.data); 
+      navigate('/'); 
     } catch (err) {
       setError(err.response?.data?.msg || 'Login failed');
     }
