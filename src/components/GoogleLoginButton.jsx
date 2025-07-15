@@ -5,6 +5,7 @@ import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { FcGoogle } from 'react-icons/fc';
+import axios from 'axios';
 
 const GoogleLoginButton = () => {
   const navigate = useNavigate();
@@ -15,15 +16,14 @@ const GoogleLoginButton = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      saveAuth({
-        token: await user.getIdToken(),
-        user: {
-          username: user.displayName,
-          email: user.email,
-          id: user.uid
-        }
+      // ✅ Send Google user to backend
+      const res = await axios.post('https://musify-backend-hz9d.onrender.com/api/auth/google', {
+        username: user.displayName,
+        email: user.email,
       });
 
+      // ✅ Save backend token and user in context
+      saveAuth(res.data);
       navigate('/');
     } catch (error) {
       console.error('Google login error:', error);
