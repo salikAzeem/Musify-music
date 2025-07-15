@@ -4,6 +4,14 @@
   font-family: 'Helvetica Neue', Arial, sans-serif;
   min-height: 100vh;
 }
+.auth-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+
 
 .background-video {
   position: fixed;
@@ -33,12 +41,12 @@
 
 .auth-box {
   background-color: rgba(34, 34, 34, 0.95);
-  padding: 40px 30px;
+  padding: 40px 20px;
   border-radius: 12px;
   max-width: 400px;
   width: 100%;
   color: #fff;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
   text-align: center;
   animation: fadeIn 1s ease;
 }
@@ -119,4 +127,24 @@
   .auth-box button {
     font-size: 14px;
   }
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: #000;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.google-btn:hover {
+  background-color: #f2f2f2;
 }

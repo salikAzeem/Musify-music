@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import './Auth.css'; // ensure styles are included
+import './Auth.css'; 
+import GoogleLoginButton from '../components/GoogleLoginButton';
 
 
 const LoginPage = () => {
@@ -40,7 +41,9 @@ const LoginPage = () => {
           <input name="email" value={form.email} onChange={handleChange} placeholder="Email" />
           <input name="password" type="password" value={form.password} onChange={handleChange} placeholder="Password" />
           <button type="submit">Login</button>
+          <GoogleLoginButton />
         </form>
+        
       </div>
     </div>
   );
