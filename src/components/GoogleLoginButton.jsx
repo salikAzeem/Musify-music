@@ -5,6 +5,7 @@ import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { FcGoogle } from 'react-icons/fc';
+import { signInWithRedirect } from 'firebase/auth'; 
 import axios from 'axios';
 
 const GoogleLoginButton = () => {
@@ -15,6 +16,7 @@ const GoogleLoginButton = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
+       await signInWithRedirect(auth, provider);
 
       // ✅ Send Google user to backend
       const res = await axios.post('https://musify-backend-hz9d.onrender.com/api/auth/google', {
