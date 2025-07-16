@@ -1,26 +1,38 @@
 import React, { useState } from 'react';
-import { searchSongs, getSongById } from '../api/jiosaavn';
+import { searchSongs as searchJioSaavn, getSongById } from '../api/jiosaavn';
+import { searchDeezerSongs, normalizeDeezerSong } from '../api/deezer';
 import SearchBar from '../components/SearchBar';
 import SongList from '../components/SongList';
 import Player from '../components/Player';
-import './SearchPage.css';
 import QueueDebugPanel from '../components/QueueDebugPanel';
-import { useQueue } from '../context/queueContext'; // ✅ Import the queue hook
+import { useQueue } from '../context/queueContext';
+import './SearchPage.css';
 
 const SearchPage = () => {
   const [songs, setSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState(null);
-  const { addToQueue } = useQueue(); // ✅ Get addToQueue function
+  const { addToQueue } = useQueue();
 
   const handleSearch = async (query) => {
-    const results = await searchSongs(query);
-    setSongs(results);
+    const saavnSongs = await searchJioSaavn(query);
+    const deezerRaw = await searchDeezerSongs(query);
+    const deezerSongs = deezerRaw.map(normalizeDeezerSong);
+    setSongs([...saavnSongs, ...deezerSongs]);
   };
 
   const handlePlay = async (id) => {
-    const song = await getSongById(id);
-    setCurrentSong(song);
-    addToQueue(song); // ✅ Add to queue when played
+    // Check if it's a Deezer song
+    if (id.startsWith('deezer-')) {
+      const deezerTrack = songs.find((s) => s.id === id);
+      if (deezerTrack) {
+        setCurrentSong(deezerTrack);
+        addToQueue(deezerTrack);
+      }
+    } else {
+      const saavnTrack = await getSongById(id);
+      setCurrentSong(saavnTrack);
+      addToQueue(saavnTrack);
+    }
   };
 
   return (
@@ -37,7 +49,7 @@ const SearchPage = () => {
         <div className="search-results">
           <SongList songs={songs} onPlay={handlePlay} />
           <Player song={currentSong} />
-          <QueueDebugPanel /> {/* ✅ Show the queue */}
+          <QueueDebugPanel />
         </div>
       </div>
     </div>

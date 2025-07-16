@@ -8,12 +8,13 @@ import SearchPage from './pages/SearchPage';
 import LibraryPage from './pages/LibraryPage';
 import './App.css'; 
 import PlaylistPage from './pages/PlaylistPage';
-import TopChartsPage from './pages/TopChartsPage'; 
 import RecentlyPlayedPage from './pages/RecentlyPlayedPage';
 import { QueueProvider } from './context/queueContext';
 import { AuthProvider } from './context/AuthContext';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import AlbumsPage from './pages/AlbumsPage';
+import AlbumSongs from './pages/AlbumSongs';
 
 
 
@@ -37,7 +38,9 @@ function App() {
                 <Route path="/library" element={<LibraryPage />} />
                 <Route path="/recently-played" element={<RecentlyPlayedPage />} />
                 <Route path="/playlist/:playlistId" element={<PlaylistPage />} />
-                <Route path="/top-charts" element={<TopChartsPage />} />
+                <Route path="/albums" element={<AlbumsPage />} />
+                <Route path="/albums/:tag" element={<AlbumSongs />} />
+              
               </Routes>
             </div>
             <Footer />

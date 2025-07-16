@@ -1,5 +1,6 @@
 import React from 'react';
 import './HomePage.css';
+import HomeAlbums from '../components/HomeAlbums';
 
 const HomePage = () => {
   return (
@@ -14,7 +15,9 @@ const HomePage = () => {
           <h1 className="hero-title">Welcome to <span>Musify</span> 🎧</h1>
           <p className="hero-subtitle">Stream your favorite music with the power of the Musify</p>
           <a href="/search" className="hero-button">Start Listening</a>
+          
         </div>
+        
 
         <div className="features">
           <div className="feature-card">
@@ -30,6 +33,7 @@ const HomePage = () => {
             <p>Modern, clean, and bug-free design for the best user experience.</p>
           </div>
         </div>
+        
       </div>
     </div>
   );
