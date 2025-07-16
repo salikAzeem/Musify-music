@@ -132,6 +132,7 @@
 .google-btn {
   display: flex;
   align-items: center;
+  width: 100%;
   justify-content: center;
   background-color: white;
   color: #000;
